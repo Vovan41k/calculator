@@ -12,7 +12,7 @@ const equals = ['=']
 const displayEl = document.querySelector('.display')
 let stage = 0
 let num1 = ''
-let op=''
+let op = ''
 let num2 = ''
 const buttonsEl = document.querySelector('.buttons')
 // Калькулятор
@@ -28,20 +28,20 @@ const newButton = (btn) => {
     buttonsEl.appendChild(el)
 }
 const showInfo = () => {
-    displayEl.textContent = num1 + op + num2 || '0' 
-    if(stage===4){
+    displayEl.textContent = num1 + op + num2 || '0'
+    if (stage === 4) {
         displayEl.textContent += '='
-        if(op==='+'){
-            displayEl.textContent += (+num1+(+num2))
+        if (op === '+') {
+            displayEl.textContent += (+num1 + (+num2))
         }
-        else if(op==="-"){
-            displayEl.textContent += (num1-num2)
+        else if (op === "-") {
+            displayEl.textContent += (num1 - num2)
         }
-        else if(op==="*"){
-            displayEl.textContent += (num1*num2)
+        else if (op === "*") {
+            displayEl.textContent += (num1 * num2)
         }
-        else if(op==="/"){
-            displayEl.textContent += (num1/num2)
+        else if (op === "/") {
+            displayEl.textContent += (num1 / num2)
         }
     }
 }
@@ -72,29 +72,29 @@ const handleClick = (text) => {
         if (isDigit) {
             num1 += text
         }
-        else if (isOperation){
+        else if (isOperation) {
             stage = 2
             // alert('stage=2')
             op = text
         }
     }
-    else if(stage===2){ //Ввод арифметических операций
-        if (isOperation){
+    else if (stage === 2) { //Ввод арифметических операций
+        if (isOperation) {
             op = text
         }
-        else if (isDigit && text !=='0'){
+        else if (isDigit && text !== '0') {
             stage = 3
             num2 = text
         }
     }
-    else if(stage===3){
-        if(isDigit){
-            num2 +=text
+    else if (stage === 3) {
+        if (isDigit) {
+            num2 += text
         }
-        else if(isEqual){
+        else if (isEqual) {
             stage = 4
         }
-    }   
+    }
     showInfo()
 }
 for (const row of buttons) {
@@ -108,3 +108,6 @@ document.querySelectorAll('.btn')
             handleClick(buttonEl.textContent)
         }
     })
+window.addEventListener('keyup', (event) => {
+    handleClick(event.key)
+})
